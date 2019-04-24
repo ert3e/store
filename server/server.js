@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE);
+require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE);
