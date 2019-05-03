@@ -30,7 +30,8 @@ app.post('/api/user/register',(req,res)=>{
 app.post('/api/users/login',(req,res)=>{
    User.findOne({'email': req.body.email}, () =>{
        if(!user) return res.json({loginSucces:false, message:'Ath failes mails not found'})
-   })
+       user.comparePassword()
+    })
 })
 app.post('/api')
 const port = process.env.PORT || 3002;
