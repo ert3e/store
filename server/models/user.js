@@ -45,7 +45,7 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save', function(next){
     var user = this;
-    if(user.isModified('pasword')){
+    if(user.isModified('password')){
         bcrypt.genSalt(SALT_I,function(err,salt){
             if(err) return next(err);
             bcrypt.hash(user.password, salt, function(err,hash){
@@ -64,9 +64,14 @@ userSchema.methods.comparePassword = function(candidatePassword,cb){
         cb(null,isMatch)
     })
 }
-userSchema.methods.generateToken = function(){
+userSchema.methods.generateToken = function(cb){
     var user = this;
-    var token = jwt.sign(user._id);
+    var token = jwt.sign(user._id.toHexString(),process.env.SECRET);
+    user.token = token;
+    user.save(function(err,user){
+        if(err) return cb(err);
+        cb(null,user);
+    })
 }
 const User = mongoose.model('User',userSchema);
 
