@@ -14,8 +14,22 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 //Models
 const { User } = require('./models/user');
+const { Brand } = require('./models/brand');
 //Middlewares
 const { auth } = require('./middleware/auth')
+//==================================
+//             BRAND
+//==================================
+app.post('/api/users/register',auth,(req,res)=>{
+    const brand = new Brand(req.body);
+    brand.save((err, doc)=>{
+        if(err) return req.json({succes:false,err});
+        res.status(200).json({
+            succes: true,
+            brand: doc
+        })
+    })
+});
 //==================================
 //             USERS
 //==================================
