@@ -20,6 +20,16 @@ const { auth } = require('./middleware/auth')
 //==================================
 //             BRAND
 //==================================
+app.post('/api/product/brand', auth,(req,res)=>{
+    const brand = new Brand(req.body);
+    brand.save((err,doc)=>{
+        if(err) return res.json({succes:false,err});
+        res.status(200).json({
+            succes:true,
+            brand: doc
+        })
+    })
+})
 app.post('/api/users/register',auth,(req,res)=>{
     const brand = new Brand(req.body);
     brand.save((err, doc)=>{
