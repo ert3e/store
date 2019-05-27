@@ -71,6 +71,24 @@ app.get('/api/product/woods',(req,res)=>{
         res.status(200).send(woods)
     })
 })
+//==================================
+//             PRODUCTS
+//==================================
+app.post('/api/product/article', auth, admin, (req,res)=>{
+    const product = new Product(req.body);
+
+    process.save((err,doc)=>{
+        if(err) return res.json({succes:false,err});
+        res.status(200).json({
+            succes: true,
+            article: doc
+        })
+    })
+})
+
+//==================================
+//             USER LOGIN
+//==================================
 app.get('/api/users/auth',auth,(req,res)=>{
     res.status(200).json({
         isAdmin: req.user.role === 0 ? false : true,
