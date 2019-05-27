@@ -15,7 +15,7 @@ app.use(cookieParser());
 //Models
 const { User } = require('./models/user');
 const { Brand } = require('./models/brand');
-const { Wood } = require('./models/brand');
+const { Wood } = require('./models/wood');
 //Middlewares
 const { auth } = require('./middleware/auth')
 const { admin } = require('./middleware/admin')
@@ -68,6 +68,7 @@ app.post('/api/product/wood',auth,admin,(req,res)=>{
 app.get('/api/product/woods',(req,res)=>{
     Wood.find({},(err, woods)=>{
         if(err) return res.status(400).send(err);
+        res.status(200).send(woods)
     })
 })
 app.get('/api/users/auth',auth,(req,res)=>{

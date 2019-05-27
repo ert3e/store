@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const woodSchema = mongoose.Schema({
     name:{
-        require: true,
+        required: true,
         type: String,
         unique: 1,
-        maxlength:100
+        maxlength: 100
     }
 });
 
