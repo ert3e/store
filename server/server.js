@@ -78,12 +78,17 @@ app.get('/api/product/woods',(req,res)=>{
 app.get('/api/product/articles', (req,res)=>{
     let order =  res.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-    let limit = req.query.limit ? req.query.limit : 100
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
     Product.
     find().
     populate('brand').
     populate('wood').
-    sort([[sortBy,order]])
+    sort([[sortBy,order]]).
+    limit(limit).
+    exec((err,articles)=>{
+        if(err) return res.status(400).send(err);
+        res.send(articles)
+    })
 })
 app.get('/api/product/articles_by_id',(req,res)=>{
     let type = req.query.type;
