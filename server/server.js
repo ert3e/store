@@ -75,6 +75,16 @@ app.get('/api/product/woods',(req,res)=>{
 //==================================
 //             PRODUCTS
 //==================================
+app.get('/api/product/articles', (req,res)=>{
+    let order =  res.query.order ? req.query.order : 'asc';
+    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    let limit = req.query.limit ? req.query.limit : 100
+    Product.
+    find().
+    populate('brand').
+    populate('wood').
+    sort([[sortBy,order]])
+})
 app.get('/api/product/articles_by_id',(req,res)=>{
     let type = req.query.type;
     let items = req.query.id;
