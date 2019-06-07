@@ -6,17 +6,18 @@ import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes';
 
 import { Provider } from 'react-redux';
-import { creareStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 
 import Reducer from './reducers'
 
-const creareStoreWithMiddleware = applyMiddleware(promiseMiddleware,ReduxThunk)(creareStore);
+const creareStoreWithMiddleware = applyMiddleware(promiseMiddleware,ReduxThunk)(createStore);
 
 
 ReactDOM.render(
-    <Provider store={creareStoreWithMiddleware(Reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+    <Provider store={creareStoreWithMiddleware(Reducer,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
         }>
         <BrowserRouter>
             <Routes />
