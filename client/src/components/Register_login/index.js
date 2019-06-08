@@ -1,5 +1,6 @@
 import React from 'react';
 import MyButton from '../untils/button';
+import Login from './login';
 const ResgisterLogin = () => {
     return (
         <div className="page_wrapper">
@@ -24,7 +25,9 @@ const ResgisterLogin = () => {
                         />
                     </div>
                     <div className="right">
-
+                        <h2>Resgistred customers</h2>
+                        <p>If you have an account please log in.</p>
+                        <Login/>
                     </div>
                 </div>
             </div>
