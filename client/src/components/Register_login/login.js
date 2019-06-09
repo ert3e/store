@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FormField from '../untils/Form/formfield';
+import { update, generateData } from '../untils/Form/formActions';
+
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -17,7 +19,8 @@ class Login extends Component {
                     placeholder: 'Enter your email'
                 },
                 validation:{
-                    required: true
+                    required: true,
+                    email: true
                 },
                 valid: false,
                 touched: false,
@@ -40,23 +43,40 @@ class Login extends Component {
             }
         }
     }
-    updateForm = () => {
-
+    updateForm = (element) => {
+        const newFormdata = update(element, this.state.formdata, 'login');
+        this.setState({
+            formError: false,
+            formdata: newFormdata
+        })
     }
-    submitForm = () => {
-
+    submitForm = (event) => {
+        event.preventDefault();
+        let dataToSubmit = generateData(this.state.formdata, 'login');
+        console.log(dataToSubmit);
     }
     render(){
         return (
-            <div classNam="signin_wrapper">
+            <div className="signin_wrapper">
                 <form onSubmit={(event)=> this.submitForm(event)}>
-
                     <FormField
                         id={'email'}
                         formdata={this.state.formdata.email}
                         change={(element)=> this.updateForm(element)}
                     />
-
+                    <FormField
+                        id={'password'}
+                        formdata={this.state.formdata.password}
+                        change={(element)=> this.updateForm(element)}
+                    />
+                    { this.state.formError ?
+                        <div className="error_label">
+                            Please check your data
+                        </div>
+                    :null}
+                    <button onClick={(event)=> this.submitForm(event)}>
+                        Log in
+                    </button>
                 </form>
             </div>
         );
