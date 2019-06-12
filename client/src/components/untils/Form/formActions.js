@@ -42,3 +42,10 @@ export const generateData = (formdata, formName) => {
     }
     return dataToSubmit;
 }
+export const isFormValid = (formdata, formName) => {
+    let formIsValid = true;
+    for(let key in formdata){
+        formIsValid = formdata[key].valid && formIsValid
+    }
+    return formIsValid;
+}
