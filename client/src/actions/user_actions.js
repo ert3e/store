@@ -8,7 +8,7 @@ import { USER_SERVER } from '../components/untils/misc';
 
 export function loginUser(dataToSubmit){
 
-    const request = axios.post.post(`${USER_SERVER}/login`,dataToSubmit)
+    const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
     .then(response => response.data);
 
     return {

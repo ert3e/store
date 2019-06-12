@@ -54,8 +54,9 @@ class Login extends Component {
         event.preventDefault();
         let dataToSubmit = generateData(this.state.formdata, 'login');
         let formIsValid = isFormValid(this.state.formdata, 'login');
+        console.log(dataToSubmit)
         if(formIsValid){
-            console.log(dataToSubmit);
+            this.props.dispatch(loginUser(dataToSubmit));
         } else {
             this.setState({
                 formError: true
