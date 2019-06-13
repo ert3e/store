@@ -137,13 +137,13 @@ app.get('/api/users/auth',auth,(req,res)=>{
 })
 app.post('/api/users/login',(req,res)=>{
    User.findOne({'email': req.body.email},(err, user)=>{
-       if(!user) return res.json({loginSucces:false, message:'Auth failes mails not found'})
+       if(!user) return res.json({loginSuccess:false, message:'Auth failes mails not found'})
        user.comparePassword(req.body.password,(err,isMatch)=>{
-           if(!isMatch) return res.json({loginSucces:false,message:'Wrong password'});
+           if(!isMatch) return res.json({loginSuccess:false,message:'Wrong password'});
            user.generateToken((err,user) =>{
                if(err) return res.status(400).send(err);
                res.cookie('w_auth',user.token).status(200).json({
-                   loginSucces: true
+                   loginSuccess: true
                })
            })
         })
