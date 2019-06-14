@@ -87,7 +87,7 @@ class Login extends Component {
                         formdata={this.state.formdata.password}
                         change={(element)=> this.updateForm(element)}
                     />
-                    { this.state.formError ?
+                    {this.state.formError ?
                         <div className="error_label">
                             Please check your data
                         </div>

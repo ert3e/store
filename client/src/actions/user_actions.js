@@ -4,7 +4,9 @@ import {
 } from './types';
 import { USER_SERVER } from '../components/untils/misc';
 
-
+export function registerUser(dataToSubmit){
+    const request = axios.post(`${USER_SERVER}/register`,dataToSubmit)
+}
 
 export function loginUser(dataToSubmit){
 
