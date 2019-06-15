@@ -101,6 +101,22 @@ class Register extends Component {
         let formIsValid = isFormValid(this.state.formdata, 'register');
 
         if(formIsValid){
+            this.props.dispatch(registerUser(dataToSubmit))
+            .then(response => {
+                if(response.payload.success){
+                    this.setState({
+                        formError: false,
+                        formSucces: true
+                    });
+                    setTimeout(()=>{
+                        this.props.history.push('register_login')
+                    })
+                } else {
+                    this.setState({formError: true})
+                }
+            }).catch(e => {
+                this.setState({formError: true})
+            })
             console.log(dataToSubmit);
         } else {
             this.setState({
@@ -126,15 +142,15 @@ class Register extends Component {
                                     </div>
                                     <div className="block">
                                         <FormField
-                                            id={'lastname'}
-                                            formdata={this.state.formdata.lastname}
+                                            id={'name'}
+                                            formdata={this.state.formdata.name}
                                             change={(element)=> this.updateForm(element)}
                                         />
                                     </div>
                                 </div>
                                 <div>
                                     <FormField
-                                        id={'email'}
+                                        id={'lastname'}
                                         formdata={this.state.formdata.lastname}
                                         change={(element)=> this.updateForm(element)}
                                     />

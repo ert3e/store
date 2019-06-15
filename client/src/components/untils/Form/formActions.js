@@ -7,7 +7,7 @@ export const validate = (element, formdata=[]) => {
     }
     if(element.validation.confirm){
         const valid = element.value.trim() === formdata[element.validation.confirm].value;
-        const message = `${!valid ? 'Password do not match':''}`;
+        const message = `${!valid ? 'Passwords do not match':''}`;
         error = !valid ? [valid, message] : error;
     }
     if(element.validation.required){
@@ -21,7 +21,6 @@ export const update = (element, formdata, formName) => {
     const newFormdata = {
         ...formdata
     }
-    console.log(newFormdata);
     const newElement = {
         ...newFormdata[element.id]
     }
