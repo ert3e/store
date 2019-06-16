@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import FormField from '../untils/Form/formfield';
 import { update, generateData, isFormValid } from '../untils/Form/formActions';
+import Dialog from '@material-ui/core/Dialog';
 
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/user_actions';
 class Register extends Component {
     state = {
         formError: false,
-        formSucces: '',
+        formSucces: false,
         formdata: {
             name: {
                 element: 'input',
@@ -109,8 +110,8 @@ class Register extends Component {
                         formSucces: true
                     });
                     setTimeout(()=>{
-                        this.props.history.push('register_login')
-                    })
+                        this.props.history.push('/register_login');
+                    }, 3000)
                 } else {
                     this.setState({formError: true})
                 }
@@ -186,9 +187,18 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
+                <Dialog open={this.state.formSuccess}>
+                    <div className="dialog_alert">
+                        <div>Congratulations !!</div>
+                        <div>
+                            You will be redirect to the LOGIN in a couple seconds
+                        </div>
+                    </div>
+                </Dialog>
+
             </div>
         );
     }
 }
 
-export default Register;
+export default connect()(Register);
