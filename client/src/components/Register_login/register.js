@@ -97,14 +97,13 @@ class Register extends Component {
     }
     submitForm = (event) => {
         event.preventDefault();
-
         let dataToSubmit = generateData(this.state.formdata, 'register');
         let formIsValid = isFormValid(this.state.formdata, 'register');
-
+        console.log(formIsValid);
         if(formIsValid){
             this.props.dispatch(registerUser(dataToSubmit))
             .then(response => {
-                if(response.payload.success){
+                if(response.payload.succes){
                     this.setState({
                         formError: false,
                         formSucces: true
@@ -187,7 +186,7 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
-                <Dialog open={this.state.formSuccess}>
+                <Dialog open={this.state.formSucces}>
                     <div className="dialog_alert">
                         <div>Congratulations !!</div>
                         <div>
