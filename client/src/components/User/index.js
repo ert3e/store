@@ -15,7 +15,15 @@ const UserDashboard = () => {
                     </div>
                     <MyBotton
                         type="default"
+                        title="Edit account info"
+                        linkTo="/user/user_profile"
                     />
+                </div>
+                <div className="user_nfo_panel">
+                    <h1>History purchases</h1>
+                    <div className="user_product_block_wrapper">
+                        History
+                    </div>
                 </div>
             </div>
         </UserLayout>
