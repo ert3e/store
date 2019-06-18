@@ -8,7 +8,7 @@ import { registerUser } from '../../actions/user_actions';
 class Register extends Component {
     state = {
         formError: false,
-        formSucces: false,
+        formSuccess: false,
         formdata: {
             name: {
                 element: 'input',
@@ -106,7 +106,7 @@ class Register extends Component {
                 if(response.payload.succes){
                     this.setState({
                         formError: false,
-                        formSucces: true
+                        formSuccess: true
                     });
                     setTimeout(()=>{
                         this.props.history.push('/register_login');
@@ -186,7 +186,7 @@ class Register extends Component {
                         </div>
                     </div>
                 </div>
-                <Dialog open={this.state.formSucces}>
+                <Dialog open={this.state.formSuccess}>
                     <div className="dialog_alert">
                         <div>Congratulations !!</div>
                         <div>
