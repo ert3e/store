@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
+    state={
+        page: [
+            {
+                name:'Home',
+                linkTo:'/',
+                publick: true
+            },
+            {
+                name:'Guitars',
+                linkTo:'/shop',
+                publick: true
+            },
+        ],
+        user:[
+            {
+                name:'My Cart',
+                linkTo:'/',
+                publick: true
+            },
+        ]
+    }
     render() {
         return (
             <header className="bck_b_light">
