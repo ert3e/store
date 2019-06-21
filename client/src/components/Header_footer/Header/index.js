@@ -1,26 +1,69 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 class Header extends Component {
-    state={
+    state = {
         page: [
             {
                 name:'Home',
                 linkTo:'/',
-                publick: true
+                public: true
             },
             {
                 name:'Guitars',
                 linkTo:'/shop',
-                publick: true
+                public: true
             },
         ],
         user:[
             {
                 name:'My Cart',
-                linkTo:'/',
-                publick: true
+                linkTo:'/user',
+                public: false
+            },
+            {
+                name:'My Account',
+                linkTo:'/user/dashboard',
+                public: false
+            },
+            {
+                name:'Log in',
+                linkTo:'/register_login',
+                public: true
+            },
+            {
+                name:'Log out',
+                linkTo:'/user/logout',
+                public: false
             },
         ]
+    }
+    defaultLink = (item,i) => (
+        <Link to={item.link} key={i}>
+            {item.name}
+        </Link>
+    )
+    showLinks = (type) => {
+        console.log(type.props);
+        let list = [];
+        if(this.props.user.userData){
+            type.forEach((item) => {
+                if(!type.props.user.userData.isAuth){
+                    if(item.public === true){
+                        list.push(item)
+                    }
+                }else{
+                    if(item.name !== 'Log in'){
+                        list.push(item)
+                    }
+                }
+            });
+        }
+        return list.map((item,i)=>{
+            return this.defaultLink(item,i)
+        })
     }
     render() {
         return (
@@ -33,10 +76,10 @@ class Header extends Component {
                     </div>
                     <div className="right">
                         <div className="top">
-                            LINKS
+                            {this.showLinks(this.state.user)}
                         </div>
                         <div className="bottom">
-                            LINKS
+                            {this.showLinks(this.state.page)}
                         </div>
                     </div>
                 </div>
@@ -44,5 +87,9 @@ class Header extends Component {
         );
     }
 }
-
-export default Header;
+function mapStateToProps(state){
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps)(Header);
