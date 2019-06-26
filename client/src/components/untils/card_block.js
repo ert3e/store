@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Card from './card';
 const CardBlock = (props) => {
 
 
@@ -7,7 +7,10 @@ const CardBlock = (props) => {
         props.list ?
             props.list.map((card,i)=>(
                 <div>
-                    'CARD'
+                    <Card
+                    key={i}
+                    {...card}
+                    />
                 </div>
             ))
         :null
