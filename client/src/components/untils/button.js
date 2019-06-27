@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faShopingBag  from '@fortawesome/fontawesome-free-solid/faShoppingBag';
 const MyButton = (props) => {
 
     const buttons = () => {
@@ -9,15 +10,27 @@ const MyButton = (props) => {
         switch(props.type){
             case "default":
                     template= <Link
-                        className="link_default"
+                        className={!props.altClass ? 'Link_default': props.altClass}
                         to={props.linkTo}
                         {...props.addStyles}
                     >
                         {props.title}
                     </Link>
                 break;
-            default:
-                template='';
+                case "bag_link":
+                    template =
+                        <div className="bag_link"
+                            onClick={()=>{
+                                props.runAction();
+                            }}
+                        >
+                            <FontAwesomeIcon
+                                icon={faShopingBag}
+                            />
+                        </div>
+                break;
+                default:
+                    template='';
         }
         return template;
     }
