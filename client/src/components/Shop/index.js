@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PageTop from '../untils/page_top';
 
 import { connect } from 'react-redux';
-import{geBrands, getWoods, getBrands} from '../../actions/products_actions';
+import{getWoods, getBrands} from '../../actions/products_actions';
+import CollapseCheckbox from '../untils/collapseCheckbox'
 
 class Shop extends Component {
     componentDidMount(){
@@ -16,7 +17,6 @@ class Shop extends Component {
                 <PageTop
                     title="Browse Products"
                 />
-            
             <div className="container">
                 <div className="shop_wrapper">
                     <div className="left">
