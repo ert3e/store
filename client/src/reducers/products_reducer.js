@@ -12,9 +12,9 @@ export default function(state={}, action){
         case GET_PRODUCTS_BY_SELL:
             return {...state, bySell: action.payload}
         case GET_BRANDS:
-            return {...state, GET_BRANDS: action.payload}
+            return {...state, brands: action.payload}
         case GET_WOODS:
-            return {...state, GET_WOODS: action.payload}
+            return {...state, woods: action.payload}
         default:
             return state;
     }
