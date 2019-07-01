@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PageTop from '../untils/page_top';
 
-import { frets } from '../untils/Form/fixed_categories';
+import { frets, price } from '../untils/Form/fixed_categories';
 
 import { connect } from 'react-redux';
 import {getWoods, getBrands } from '../../actions/products_actions';
 
 import CollapseCheckbox from '../untils/collapseCheckbox'
+import CollapseRadio from '../untils/collapseRadio';
 
 class Shop extends Component {
 
@@ -26,9 +27,24 @@ class Shop extends Component {
         this.props.dispatch(getWoods());
         this.props.dispatch(getBrands());
     }
+    handlePrice = (value) => {
+        const data = price;
+        let array = [];
+        for(let key in data){
+            if(data[key]._id === parseInt(value,10)){
+                array = data[key].array
+            }
+        }
+        return array;
+    }
     handleFilters = (filters, category) => {
         const newFilters = {...this.state.filters}
         newFilters[category] = filters;
+
+        if(category === "price"){
+            let priceValues = this.handlePrice(filters);
+            newFilters[category] = priceValues;
+        }
 
         this.setState({
             filters: newFilters
@@ -57,11 +73,11 @@ class Shop extends Component {
                                 list={frets}
                                 handleFilters={(filters)=> this.handleFilters(filters, 'frets')}
                             />
-                            <CollapseCheckbox
+                            <CollapseRadio
                                 initState={false}
-                                title="Wood"
-                                list={products.woods}
-                                handleFilters={(filters)=> this.handleFilters(filters, 'wood')}
+                                title="Price"
+                                list={price}
+                                handleFilters={(filters)=> this.handleFilters(filters, 'Price')}
                             />
                         </div>
                         <div className="right">
