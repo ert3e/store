@@ -75,6 +75,25 @@ app.get('/api/product/woods',(req,res)=>{
 //==================================
 //             PRODUCTS
 //==================================
+app.post('/api/product/shop', (req,res) => {
+    let order = req.body.order ? req.body.order : 'desc';
+    let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    let limit = req.body.limit ? parseInt(req.body.limit) : 100;
+    let skip = paeseInt(req.body.skip);
+    let findArgs = {};
+    for(let key in req.body.filters){
+        if(req.body.filters[key].length > 0){
+            if(key === 'price'){
+                    findArgs[key] = {
+                        $gte: req.body.filters[key][0],
+                        $lte: req.body.filters[key][1]
+                    }
+            } else {
+                findArgs[key] = req.body.filters[key]
+            }
+        }
+    }
+})
 app.get('/api/product/articles', (req,res)=>{
     let order =  req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
