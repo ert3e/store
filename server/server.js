@@ -93,6 +93,19 @@ app.post('/api/product/shop', (req,res) => {
             }
         }
     }
+    Product.
+        find(findArgs).
+        populate('brand').
+        populate('wood').sort([[sortBy,order]]).
+        skip(skip).
+        limit(limit).
+        exec((err, articles)=>{
+            if(err) return res.status(400).send(err);
+            res.status(200).json({
+                size: articles.length,
+                articles
+            })
+        })
 })
 app.get('/api/product/articles', (req,res)=>{
     let order =  req.query.order ? req.query.order : 'asc';

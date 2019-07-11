@@ -23,7 +23,7 @@ class Shop extends Component {
         }
     }
 
-    componentDidMount =() =>{
+    componentDidMount = () =>{
         this.props.dispatch(getWoods());
         this.props.dispatch(getBrands());
 
@@ -51,13 +51,23 @@ class Shop extends Component {
             let priceValues = this.handlePrice(filters);
             newFilters[category] = priceValues;
         }
-
+        this.showFilteredResults(newFilters);
         this.setState({
             filters: newFilters
         })
     }
+    showFilteredResults = (filters) => {
+        this.props.dispatch(getProductsToShop(
+            0,
+            this.state.limit,
+            filters
+        )).then(()=>{
+            this.setState({
+                skip:0
+            })
+        })
+    }
     render() {
-        console.log(this.state)
         const products = this.props.products;
         return (
             <div>
