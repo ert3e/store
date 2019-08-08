@@ -97,7 +97,8 @@ app.post('/api/product/shop', (req,res) => {
     Product.
         find(findArgs).
         populate('brand').
-        populate('wood').sort([[sortBy,order]]).
+        populate('wood').
+        sort([[sortBy,order]]).
         skip(skip).
         limit(limit).
         exec((err, articles)=>{
@@ -107,7 +108,6 @@ app.post('/api/product/shop', (req,res) => {
                 articles
             })
         })
-    console.log(findArgs);
 })
 app.get('/api/product/articles', (req,res)=>{
     let order =  req.query.order ? req.query.order : 'asc';

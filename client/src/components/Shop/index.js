@@ -10,6 +10,9 @@ import CollapseCheckbox from '../untils/collapseCheckbox'
 import CollapseRadio from '../untils/collapseRadio';
 
 import LoadmoreCards from './loadmoreCards';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faBars  from '@fortawesome/fontawesome-free-solid/faBars';
+import faTh  from '@fortawesome/fontawesome-free-solid/faTh';
 
 class Shop extends Component {
 
@@ -69,6 +72,19 @@ class Shop extends Component {
             })
         })
     }
+    loadMoreCards = () => {
+        let skip = this.state.skip + this.state.limit;
+        this.props.dispatch(getProductsToShop(
+            skip,
+            this.state.limit,
+            this.state.filters,
+            this.props.products.toShop
+        )).then(()=>{
+            this.setState({
+                skip
+            })
+        })
+    }
     render() {
         const products = this.props.products;
         return (
@@ -101,7 +117,10 @@ class Shop extends Component {
                         <div className="right">
                             <div className="shop_options">
                                 <div className="shop_grids clear">
-                                    grids
+                                    <div className={`grid_btn ${this.state.grid?'':'active'}`}
+                                         onClick={()=> this.handleGrid()}>
+                                             <FontAwesomeIcon icon={faTh}/>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -110,7 +129,7 @@ class Shop extends Component {
                                     limit={this.state.limit}
                                     size={products.toShopSize}
                                     products={products.toShop}
-                                    loadMore={()=> console.log('load more')}
+                                    loadMore={()=> this.loadMoreCards()}
                                  />
                             </div>
                         </div>
