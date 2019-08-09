@@ -85,6 +85,11 @@ class Shop extends Component {
             })
         })
     }
+    handleGrid = () => {
+        this.setState({
+            grid: !this.state.grid ? 'grid_bars':''
+        })
+    }
     render() {
         const products = this.props.products;
         return (
@@ -120,6 +125,10 @@ class Shop extends Component {
                                     <div className={`grid_btn ${this.state.grid?'':'active'}`}
                                          onClick={()=> this.handleGrid()}>
                                              <FontAwesomeIcon icon={faTh}/>
+                                    </div>
+                                    <div className={`grid_btn ${this.state.grid?'':'active'}`}
+                                         onClick={()=> this.handleGrid()}>
+                                             <FontAwesomeIcon icon={faBars}/>
                                     </div>
                                 </div>
                             </div>
